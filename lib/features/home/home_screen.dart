@@ -35,7 +35,6 @@ class _HomePageState extends State<HomePage> {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           const SliverAppBar(
-            backgroundColor: Colors.white,
             title: Text(
               "Another Manager",
               maxLines: 1,

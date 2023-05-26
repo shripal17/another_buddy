@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:another_buddy/model/loading_stage.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -7,7 +5,6 @@ import 'package:meta/meta.dart';
 import 'package:root/root.dart';
 
 part 'home_event.dart';
-
 part 'home_state.dart';
 
 typedef HomeEmitter = Emitter<HomeState>;
@@ -28,5 +25,4 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(const HomeLoadingState(LoadingStage.rootAccess));
     emit(HomeRootAccessCheckedState(await Root.isRootAvailable() ?? false));
   }
-
 }
