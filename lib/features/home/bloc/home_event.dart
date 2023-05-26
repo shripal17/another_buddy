@@ -7,6 +7,8 @@ class CheckRootAvailabilityEvent extends HomeEvent {}
 
 class CheckRootAccessEvent extends HomeEvent {}
 
+class FetchCurrentValuesEvent extends HomeEvent {}
+
 class ValueUpdatedEvent extends HomeEvent {
 
 }
