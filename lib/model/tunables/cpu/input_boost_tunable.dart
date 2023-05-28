@@ -1,5 +1,7 @@
+import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/cpu/cpu_tunable.dart';
 
+@tunable
 class InputBoostTunable extends CpuBooleanTunable {
   @override
   bool get defaultValue => false;
@@ -9,5 +11,4 @@ class InputBoostTunable extends CpuBooleanTunable {
 
   @override
   String get path => "another_settings/active_input_cpu_boost";
-
 }

@@ -1,11 +1,13 @@
+import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/battery/battery_tunable.dart';
 
+@tunable
 class CooldownTemperatureTunable extends BatteryTunable {
   @override
   double get defaultValue => max;
 
   @override
-  double get divisions => max - min;
+  int get divisions => (max - min).toInt();
 
   @override
   String get label => "Cooldown Temperature";

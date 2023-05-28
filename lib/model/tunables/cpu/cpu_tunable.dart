@@ -1,11 +1,11 @@
-import 'package:another_buddy/model/another_tunable.dart';
+import 'package:another_buddy/model/tunables/another_tunable.dart';
 
 abstract class CpuBooleanTunable extends AnotherBooleanTunable {
   @override
-  TunableClass get tunableClass => TunableClass.cpu;
+  TunableCategory get category => TunableCategory.cpu;
 }
 
 abstract class CpuNumericTunable extends AnotherNumericTunable {
   @override
-  TunableClass get tunableClass => TunableClass.cpu;
+  TunableCategory get category => TunableCategory.cpu;
 }

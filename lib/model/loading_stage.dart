@@ -1,3 +1,3 @@
 enum LoadingStage {
-  rootAvailability, rootAccess;
+  rootAvailability, rootAccess, initialLoad;
 }

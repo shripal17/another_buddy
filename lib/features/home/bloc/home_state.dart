@@ -21,20 +21,11 @@ class HomeLoadingState extends HomeState {
   List<Object?> get props => [time, stage];
 }
 
-class HomeRootCheckedState extends HomeState {
-  final bool available;
+class ValuesLoadedState extends HomeState {
+  final Map<String, AnotherTunable> tunables;
 
-  const HomeRootCheckedState(this.available);
-
-  @override
-  List<Object?> get props => [time, available];
-}
-
-class HomeRootAccessCheckedState extends HomeState {
-  final bool granted;
-
-  const HomeRootAccessCheckedState(this.granted);
+  const ValuesLoadedState(this.tunables);
 
   @override
-  List<Object?> get props => [time, granted];
+  List<Object?> get props => [time, tunables];
 }
