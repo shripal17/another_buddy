@@ -1,11 +1,14 @@
+import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/cpu/cpu_tunable.dart';
 
+@tunable
 class BoostTimeoutTunable extends CpuNumericTunable {
   @override
   double get defaultValue => 4000;
 
+  // TODO: Fix divisions to be of 50ms
   @override
-  double get divisions => max - min;
+  int get divisions => (max - min).toInt();
 
   @override
   String get label => "Boost Timeout";

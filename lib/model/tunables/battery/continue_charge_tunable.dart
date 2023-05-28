@@ -1,11 +1,13 @@
+import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/battery/battery_tunable.dart';
 
+@tunable
 class ContinueChargeTunable extends BatteryTunable {
   @override
   double get defaultValue => 100;
 
   @override
-  double get divisions => max - min;
+  int get divisions => (max - min).toInt();
 
   @override
   double get max => 100;

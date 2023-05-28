@@ -1,11 +1,13 @@
+import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/cpu/cpu_tunable.dart';
 
+@tunable
 class BoostFrequencyTunable extends CpuNumericTunable {
   @override
   double get defaultValue => min;
 
   @override
-  double get divisions => max - min;
+  int get divisions => (max - min).toInt();
 
   @override
   String get label => "Boost Frequency";
