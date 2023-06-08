@@ -47,6 +47,8 @@ abstract class AnotherTunable<T> {
   String get label;
 
   Object? value;
+
+  String? name;
 }
 
 abstract class AnotherBooleanTunable extends AnotherTunable<bool> {}

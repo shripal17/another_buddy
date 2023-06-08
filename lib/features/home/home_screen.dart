@@ -1,8 +1,6 @@
 import 'package:another_buddy/features/home/cubit/home_cubit.dart';
-import 'package:another_buddy/features/home/widgets/numeric_slider_widget.dart';
-import 'package:another_buddy/features/home/widgets/switch_widget.dart';
+import 'package:another_buddy/features/home/widgets/tunable_category_widget.dart';
 import 'package:another_buddy/model/loading_stage.dart';
-import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -77,7 +75,12 @@ class _HomePageState extends State<HomePage> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        ...cubit.tunableInstances.keys.map((key) {
+                        ...state.tunables.entries.map(
+                          (e) => TunableCategoryWidget(
+                              category: e.key, tunables: e.value),
+                        ),
+                        // const SizedBox(height: 20),
+                        /*...cubit.tunableInstances.keys.map((key) {
                           final tunable = cubit.tunableInstances[key];
                           if (tunable is AnotherNumericTunable) {
                             return NumericSliderWidget(
@@ -109,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                           }
                           return Text("${tunable?.label}: ${tunable?.value}");
                         }),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 8),*/
                       ],
                     ),
                   ),

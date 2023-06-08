@@ -1,5 +1,6 @@
 import 'package:another_buddy/model/loading_stage.dart';
 import 'package:another_buddy/model/tunables/another_tunable.dart';
+import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitialState()) {
     for (final tunableMirror in allTunables) {
       final tunable = tunableMirror.newInstance('', []) as AnotherTunable;
+      tunable.name = tunableMirror.simpleName;
       tunableInstances[tunableMirror.simpleName] = tunable;
     }
   }
@@ -21,6 +23,13 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool _initialLoadDone = false;
 
+  void _emitValuesState() {
+    emit(ValuesLoadedState(_groupedTunables));
+  }
+
+  Map<TunableCategory, List<AnotherTunable>> get _groupedTunables =>
+      tunableInstances.values.groupBy((tunable) => tunable.category);
+
   Future<void> fetchCurrentValues() async {
     if (!_initialLoadDone) {
       emit(const HomeLoadingState(LoadingStage.initialLoad));
@@ -28,7 +37,7 @@ class HomeCubit extends Cubit<HomeState> {
     await Future.wait(tunableInstances.keys.map((tunableName) =>
         _loadValue(tunableName, tunableInstances[tunableName]!)));
     _initialLoadDone = true;
-    emit(const ValuesLoadedState());
+    _emitValuesState();
   }
 
   Future<void> _loadValue(String tunableName, AnotherTunable tunable) async {
@@ -50,13 +59,13 @@ class HomeCubit extends Cubit<HomeState> {
       print("Value update for $tunableKey successful");
     } else {
       tunableInstances[tunableKey]?.value = oldValue;
-      emit(ValueUpdateFailedState(tunableKey));
+      emit(ValueUpdateFailedState(_groupedTunables, tunableKey));
       print("output: $updatedValue");
     }
   }
 
   void updateUIValue(String tunableKey, Object newValue) {
     tunableInstances[tunableKey]?.value = newValue;
-    emit(const ValuesLoadedState());
+    _emitValuesState();
   }
 }
