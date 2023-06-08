@@ -1,4 +1,4 @@
-part of 'home_bloc.dart';
+part of 'home_cubit.dart';
 
 int get time => DateTime.now().millisecondsSinceEpoch;
 
@@ -22,10 +22,17 @@ class HomeLoadingState extends HomeState {
 }
 
 class ValuesLoadedState extends HomeState {
-  final Map<String, AnotherTunable> tunables;
-
-  const ValuesLoadedState(this.tunables);
+  const ValuesLoadedState();
 
   @override
-  List<Object?> get props => [time, tunables];
+  List<Object?> get props => [time];
+}
+
+class ValueUpdateFailedState extends ValuesLoadedState {
+  final String failedTunableName;
+
+  const ValueUpdateFailedState(this.failedTunableName);
+
+  @override
+  List<Object?> get props => [time, failedTunableName];
 }

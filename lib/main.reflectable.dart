@@ -3,20 +3,22 @@
 
 import 'dart:core';
 import 'package:another_buddy/model/tunables/another_tunable.dart' as prefix0;
-import 'package:another_buddy/model/tunables/battery/continue_charge_tunable.dart'
+import 'package:another_buddy/model/tunables/battery/auto_balance_tunable.dart'
     as prefix1;
-import 'package:another_buddy/model/tunables/battery/cooldown_temperature_tunable.dart'
+import 'package:another_buddy/model/tunables/battery/continue_charge_tunable.dart'
     as prefix2;
-import 'package:another_buddy/model/tunables/battery/max_temperature_tunable.dart'
+import 'package:another_buddy/model/tunables/battery/cooldown_temperature_tunable.dart'
     as prefix3;
-import 'package:another_buddy/model/tunables/battery/stop_charge_tunable.dart'
+import 'package:another_buddy/model/tunables/battery/max_temperature_tunable.dart'
     as prefix4;
-import 'package:another_buddy/model/tunables/cpu/boost_frequency_tunable.dart'
+import 'package:another_buddy/model/tunables/battery/stop_charge_tunable.dart'
     as prefix5;
-import 'package:another_buddy/model/tunables/cpu/boost_timeout_tunable.dart'
+import 'package:another_buddy/model/tunables/cpu/boost_frequency_tunable.dart'
     as prefix6;
-import 'package:another_buddy/model/tunables/cpu/input_boost_tunable.dart'
+import 'package:another_buddy/model/tunables/cpu/boost_timeout_tunable.dart'
     as prefix7;
+import 'package:another_buddy/model/tunables/cpu/input_boost_tunable.dart'
+    as prefix8;
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: implementation_imports
@@ -35,8 +37,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
   const prefix0.Tunable(): r.ReflectorData(
       <m.TypeMirror>[
         r.NonGenericClassMirrorImpl(
-            r'ContinueChargeTunable',
-            r'.ContinueChargeTunable',
+            r'AutoBalanceTunable',
+            r'.AutoBalanceTunable',
             134217735,
             0,
             const prefix0.Tunable(),
@@ -46,7 +48,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             -1,
             {},
             {},
-            {r'': (bool b) => () => b ? prefix1.ContinueChargeTunable() : null},
+            {r'': (bool b) => () => b ? prefix1.AutoBalanceTunable() : null},
             -1,
             -1,
             const <int>[-1],
@@ -57,6 +59,49 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
+              r'category': 0,
+              r'defaultValue': 0,
+              r'divisions': 0,
+              r'label': 0,
+              r'max': 0,
+              r'min': 0,
+              r'path': 0,
+              r'unit': 0,
+              r'valueLabels': 0
+            }),
+        r.NonGenericClassMirrorImpl(
+            r'ContinueChargeTunable',
+            r'.ContinueChargeTunable',
+            134217735,
+            1,
+            const prefix0.Tunable(),
+            const <int>[-1],
+            null,
+            null,
+            -1,
+            {},
+            {},
+            {r'': (bool b) => () => b ? prefix2.ContinueChargeTunable() : null},
+            -1,
+            -1,
+            const <int>[-1],
+            const <Object>[prefix0.tunable],
+            {
+              r'==': 1,
+              r'toString': 0,
+              r'noSuchMethod': 1,
+              r'hashCode': 0,
+              r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'divisions': 0,
@@ -71,7 +116,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             r'CooldownTemperatureTunable',
             r'.CooldownTemperatureTunable',
             134217735,
-            1,
+            2,
             const prefix0.Tunable(),
             const <int>[-1],
             null,
@@ -81,7 +126,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             {},
             {
               r'': (bool b) =>
-                  () => b ? prefix2.CooldownTemperatureTunable() : null
+                  () => b ? prefix3.CooldownTemperatureTunable() : null
             },
             -1,
             -1,
@@ -93,6 +138,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'divisions': 0,
@@ -107,7 +157,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             r'MaxTemperatureTunable',
             r'.MaxTemperatureTunable',
             134217735,
-            2,
+            3,
             const prefix0.Tunable(),
             const <int>[-1],
             null,
@@ -115,7 +165,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             -1,
             {},
             {},
-            {r'': (bool b) => () => b ? prefix3.MaxTemperatureTunable() : null},
+            {r'': (bool b) => () => b ? prefix4.MaxTemperatureTunable() : null},
             -1,
             -1,
             const <int>[-1],
@@ -126,6 +176,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'divisions': 0,
@@ -140,7 +195,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             r'StopChargeTunable',
             r'.StopChargeTunable',
             134217735,
-            3,
+            4,
             const prefix0.Tunable(),
             const <int>[-1],
             null,
@@ -148,7 +203,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             -1,
             {},
             {},
-            {r'': (bool b) => () => b ? prefix4.StopChargeTunable() : null},
+            {r'': (bool b) => () => b ? prefix5.StopChargeTunable() : null},
             -1,
             -1,
             const <int>[-1],
@@ -159,6 +214,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'divisions': 0,
@@ -173,7 +233,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             r'BoostFrequencyTunable',
             r'.BoostFrequencyTunable',
             134217735,
-            4,
+            5,
             const prefix0.Tunable(),
             const <int>[-1],
             null,
@@ -181,7 +241,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             -1,
             {},
             {},
-            {r'': (bool b) => () => b ? prefix5.BoostFrequencyTunable() : null},
+            {r'': (bool b) => () => b ? prefix6.BoostFrequencyTunable() : null},
             -1,
             -1,
             const <int>[-1],
@@ -192,6 +252,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'divisions': 0,
@@ -206,7 +271,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             r'BoostTimeoutTunable',
             r'.BoostTimeoutTunable',
             134217735,
-            5,
+            6,
             const prefix0.Tunable(),
             const <int>[-1],
             null,
@@ -214,7 +279,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             -1,
             {},
             {},
-            {r'': (bool b) => () => b ? prefix6.BoostTimeoutTunable() : null},
+            {r'': (bool b) => () => b ? prefix7.BoostTimeoutTunable() : null},
             -1,
             -1,
             const <int>[-1],
@@ -225,6 +290,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'divisions': 0,
@@ -239,7 +309,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             r'InputBoostTunable',
             r'.InputBoostTunable',
             134217735,
-            6,
+            7,
             const prefix0.Tunable(),
             const <int>[-1],
             null,
@@ -247,7 +317,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             -1,
             {},
             {},
-            {r'': (bool b) => () => b ? prefix7.InputBoostTunable() : null},
+            {r'': (bool b) => () => b ? prefix8.InputBoostTunable() : null},
             -1,
             -1,
             const <int>[-1],
@@ -258,6 +328,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'noSuchMethod': 1,
               r'hashCode': 0,
               r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'label': 0,
@@ -267,32 +339,37 @@ final _data = <r.Reflectable, r.ReflectorData>{
       null,
       null,
       <Type>[
-        prefix1.ContinueChargeTunable,
-        prefix2.CooldownTemperatureTunable,
-        prefix3.MaxTemperatureTunable,
-        prefix4.StopChargeTunable,
-        prefix5.BoostFrequencyTunable,
-        prefix6.BoostTimeoutTunable,
-        prefix7.InputBoostTunable
+        prefix1.AutoBalanceTunable,
+        prefix2.ContinueChargeTunable,
+        prefix3.CooldownTemperatureTunable,
+        prefix4.MaxTemperatureTunable,
+        prefix5.StopChargeTunable,
+        prefix6.BoostFrequencyTunable,
+        prefix7.BoostTimeoutTunable,
+        prefix8.InputBoostTunable
       ],
-      7,
+      8,
       {
         r'==': (dynamic instance) => (x) => instance == x,
         r'toString': (dynamic instance) => instance.toString,
         r'noSuchMethod': (dynamic instance) => instance.noSuchMethod,
         r'hashCode': (dynamic instance) => instance.hashCode,
         r'runtimeType': (dynamic instance) => instance.runtimeType,
+        r'value': (dynamic instance) => instance.value,
+        r'minLabel': (dynamic instance) => instance.minLabel,
+        r'maxLabel': (dynamic instance) => instance.maxLabel,
+        r'valueLabel': (dynamic instance) => instance.valueLabel,
         r'category': (dynamic instance) => instance.category,
         r'defaultValue': (dynamic instance) => instance.defaultValue,
         r'divisions': (dynamic instance) => instance.divisions,
+        r'label': (dynamic instance) => instance.label,
         r'max': (dynamic instance) => instance.max,
         r'min': (dynamic instance) => instance.min,
         r'path': (dynamic instance) => instance.path,
         r'unit': (dynamic instance) => instance.unit,
-        r'valueLabels': (dynamic instance) => instance.valueLabels,
-        r'label': (dynamic instance) => instance.label
+        r'valueLabels': (dynamic instance) => instance.valueLabels
       },
-      {},
+      {r'value=': (dynamic instance, value) => instance.value = value},
       null,
       [
         const [0, 0, null],

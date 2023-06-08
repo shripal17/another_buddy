@@ -1,6 +1,9 @@
 import 'package:reflectable/reflectable.dart';
 
 // ignore: unused_import
+import 'package:another_buddy/model/tunables/battery/auto_balance_tunable.dart';
+
+// ignore: unused_import
 import 'package:another_buddy/model/tunables/battery/continue_charge_tunable.dart';
 
 // ignore: unused_import
@@ -63,14 +66,13 @@ abstract class AnotherNumericTunable extends AnotherTunable<double> {
 
   String maxLabel() => valueLabels?.last ?? "$max$unit";
 
-  String valueLabel(double value) {
-    // TODO: Fix logic for custom value labels
-    // if (valueLabels != null) {
-    //   final index = (value - min) / divisions;
-    //   return valueLabels![index.toInt()];
-    // } else {
+  String valueLabel(num value) {
+    if (valueLabels != null) {
+      final index = value - min;
+      return valueLabels![index.toInt()];
+    } else {
       return "$value$unit";
-    // }
+    }
   }
 }
 

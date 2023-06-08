@@ -18,7 +18,7 @@ class SwitchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SwitchListTile(
       title: Text(tunable.label),
-      value: tunable.value as bool,
+      value: (tunable.value as num).toInt() == 1,
       onChanged: onValueChanged,
     );
   }

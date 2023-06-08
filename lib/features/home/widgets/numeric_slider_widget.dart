@@ -10,10 +10,14 @@ import 'package:flutter/material.dart';
 class NumericSliderWidget extends StatelessWidget {
   final AnotherNumericTunable tunable;
   final void Function(double newValue) onValueChanged;
+  final void Function(double newValue) onChangeEnd;
 
-  const NumericSliderWidget(
-      {Key? key, required this.tunable, required this.onValueChanged})
-      : super(key: key);
+  const NumericSliderWidget({
+    Key? key,
+    required this.tunable,
+    required this.onValueChanged,
+    required this.onChangeEnd,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +31,17 @@ class NumericSliderWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(child: Text(tunable.label)),
-              Text(tunable.valueLabel(tunable.value as double)),
+              Text(tunable.valueLabel(tunable.value as num)),
             ],
           ),
         ),
         Slider(
-          value: tunable.value as double,
+          value: (tunable.value as num).toDouble(),
           min: tunable.min,
           max: tunable.max,
           divisions: tunable.divisions,
           onChanged: onValueChanged,
+          onChangeEnd: onChangeEnd,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
