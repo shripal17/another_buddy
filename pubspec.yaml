@@ -15,6 +15,7 @@ dependencies:
   root: ^2.0.4
   equatable: ^2.0.5
   reflectable: ^4.0.5
+  dartx: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,9 @@ class HomeLoadingState extends HomeState {
 }
 
 class ValuesLoadedState extends HomeState {
-  const ValuesLoadedState();
+  final Map<TunableCategory, List<AnotherTunable>> tunables;
+
+  const ValuesLoadedState(this.tunables);
 
   @override
   List<Object?> get props => [time];
@@ -31,7 +33,7 @@ class ValuesLoadedState extends HomeState {
 class ValueUpdateFailedState extends ValuesLoadedState {
   final String failedTunableName;
 
-  const ValueUpdateFailedState(this.failedTunableName);
+  const ValueUpdateFailedState(super.tunables, this.failedTunableName);
 
   @override
   List<Object?> get props => [time, failedTunableName];

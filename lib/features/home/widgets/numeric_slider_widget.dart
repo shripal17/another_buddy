@@ -1,5 +1,4 @@
 import 'package:another_buddy/model/tunables/another_tunable.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -21,17 +20,31 @@ class NumericSliderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 16),
           child: Row(
             children: [
-              Expanded(child: Text(tunable.label)),
-              Text(tunable.valueLabel(tunable.value as num)),
+              Text(
+                tunable.label,
+                style: theme.textTheme.bodyLarge,
+              ),
+              IconButton(
+                onPressed: () => onValueChanged(tunable.defaultValue),
+                icon: const Icon(Icons.refresh),
+                iconSize: 22,
+              ),
+              const Spacer(),
+              Text(
+                tunable.valueLabel(tunable.value as num),
+                style: theme.textTheme.bodyMedium,
+              ),
             ],
           ),
         ),
@@ -48,13 +61,17 @@ class NumericSliderWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(tunable.minLabel()),
-              Text(tunable.maxLabel()),
+              Text(tunable.minLabel(), style: theme.textTheme.bodySmall),
+              Text(tunable.maxLabel(), style: theme.textTheme.bodySmall),
             ],
           ),
         ),
         const SizedBox(height: 8),
-        Container(width: double.maxFinite, height: 1, color: Colors.grey[700])
+        Container(
+          width: double.maxFinite,
+          height: 1,
+          color: theme.colorScheme.primaryContainer.withAlpha(200),
+        )
       ],
     );
   }
