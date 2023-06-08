@@ -6,15 +6,14 @@ class BoostTimeoutTunable extends CpuNumericTunable {
   @override
   double get defaultValue => 4000;
 
-  // TODO: Fix divisions to be of 50ms
   @override
-  int get divisions => (max - min).toInt();
+  int get divisions => (max - min) ~/ 250;
 
   @override
   String get label => "Boost Timeout";
 
   @override
-  double get max => 9999;
+  double get max => 9050;
 
   @override
   double get min => 50;

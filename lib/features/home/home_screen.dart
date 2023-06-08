@@ -1,4 +1,4 @@
-import 'package:another_buddy/features/home/bloc/home_bloc.dart';
+import 'package:another_buddy/features/home/cubit/home_cubit.dart';
 import 'package:another_buddy/features/home/widgets/numeric_slider_widget.dart';
 import 'package:another_buddy/features/home/widgets/switch_widget.dart';
 import 'package:another_buddy/model/loading_stage.dart';
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc(),
+      create: (context) => HomeCubit(),
       child: const HomePage(),
     );
   }
@@ -31,15 +31,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final bloc = context.read<HomeBloc>();
+  late final cubit = context.read<HomeCubit>();
 
   double value = 1;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-        (timeStamp) => bloc.add(FetchCurrentValuesEvent()));
+    WidgetsBinding.instance
+        .addPostFrameCallback((timeStamp) => cubit.fetchCurrentValues());
   }
 
   @override
@@ -58,8 +58,15 @@ class _HomePageState extends State<HomePage> {
             snap: false,
           )
         ],
-        body: BlocConsumer<HomeBloc, HomeState>(
-          listener: (context, state) {},
+        body: BlocConsumer<HomeCubit, HomeState>(
+          buildWhen: (_, __) => true,
+          listener: (context, state) {
+            if (state is ValueUpdateFailedState) {
+              ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(
+                  content: Text(
+                      "Failed to update value for ${state.failedTunableName}")));
+            }
+          },
           builder: (context, state) {
             if (state is HomeLoadingState &&
                 state.stage == LoadingStage.initialLoad) {
@@ -70,20 +77,34 @@ class _HomePageState extends State<HomePage> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        ...state.tunables.keys.map((key) {
-                          final tunable = state.tunables[key];
+                        ...cubit.tunableInstances.keys.map((key) {
+                          final tunable = cubit.tunableInstances[key];
                           if (tunable is AnotherNumericTunable) {
                             return NumericSliderWidget(
                               tunable: tunable,
-                              // TODO: Fix update logic
-                              onValueChanged: (newValue) => setState(() {
-                                tunable.value = newValue;
-                              }),
+                              onValueChanged: (newValue) {
+                                setState(() {
+                                  cubit.updateUIValue(key, newValue.toInt());
+                                });
+                              },
+                              onChangeEnd: (newValue) async {
+                                cubit.updateTunableFile(key, newValue.toInt());
+                              },
                             );
                           } else if (tunable is AnotherBooleanTunable) {
                             return SwitchWidget(
                               tunable: tunable,
-                              onValueChanged: (_) {},
+                              onValueChanged: (newValue) {
+                                setState(() {
+                                  if (newValue) {
+                                    cubit.updateUIValue(key, 1);
+                                    cubit.updateTunableFile(key, 1);
+                                  } else {
+                                    cubit.updateUIValue(key, 0);
+                                    cubit.updateTunableFile(key, 0);
+                                  }
+                                });
+                              },
                             );
                           }
                           return Text("${tunable?.label}: ${tunable?.value}");
