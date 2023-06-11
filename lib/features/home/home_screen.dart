@@ -45,8 +45,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const SliverAppBar(
-            title: Text(
+          SliverAppBar(
+            title: const Text(
               "Another Manager",
               maxLines: 1,
               softWrap: true,
@@ -54,6 +54,12 @@ class _HomePageState extends State<HomePage> {
             pinned: true,
             floating: true,
             snap: false,
+            actions: [
+              IconButton(
+                onPressed: _showAboutDialog,
+                icon: const Icon(Icons.info),
+              ),
+            ],
           )
         ],
         body: BlocConsumer<HomeCubit, HomeState>(
@@ -79,40 +85,6 @@ class _HomePageState extends State<HomePage> {
                           (e) => TunableCategoryWidget(
                               category: e.key, tunables: e.value),
                         ),
-                        // const SizedBox(height: 20),
-                        /*...cubit.tunableInstances.keys.map((key) {
-                          final tunable = cubit.tunableInstances[key];
-                          if (tunable is AnotherNumericTunable) {
-                            return NumericSliderWidget(
-                              tunable: tunable,
-                              onValueChanged: (newValue) {
-                                setState(() {
-                                  cubit.updateUIValue(key, newValue.toInt());
-                                });
-                              },
-                              onChangeEnd: (newValue) async {
-                                cubit.updateTunableFile(key, newValue.toInt());
-                              },
-                            );
-                          } else if (tunable is AnotherBooleanTunable) {
-                            return SwitchWidget(
-                              tunable: tunable,
-                              onValueChanged: (newValue) {
-                                setState(() {
-                                  if (newValue) {
-                                    cubit.updateUIValue(key, 1);
-                                    cubit.updateTunableFile(key, 1);
-                                  } else {
-                                    cubit.updateUIValue(key, 0);
-                                    cubit.updateTunableFile(key, 0);
-                                  }
-                                });
-                              },
-                            );
-                          }
-                          return Text("${tunable?.label}: ${tunable?.value}");
-                        }),
-                        const SizedBox(height: 8),*/
                       ],
                     ),
                   ),
@@ -123,6 +95,24 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
+    );
+  }
+
+  void _showAboutDialog() {
+    showAboutDialog(
+      context: context,
+      applicationName: "Another Manager",
+      applicationVersion: "v0.5",
+      children: [
+        Image.asset(
+          'assets/logo.png',
+          width: 200,
+          height: 200,
+          fit: BoxFit.cover,
+        ),
+        const Text(
+            "Credits:\n- Carlo San (Kernel Creator)\n- RooGhz for base of AR version\n- Babu Frik (App Developer)")
+      ],
     );
   }
 }
