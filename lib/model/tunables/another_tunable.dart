@@ -13,6 +13,9 @@ import 'package:another_buddy/model/tunables/battery/cooldown_temperature_tunabl
 import 'package:another_buddy/model/tunables/battery/max_temperature_tunable.dart';
 
 // ignore: unused_import
+import 'package:another_buddy/model/tunables/battery/hot_slow_charge.dart';
+
+// ignore: unused_import
 import 'package:another_buddy/model/tunables/battery/stop_charge_tunable.dart';
 
 // ignore: unused_import
@@ -46,12 +49,24 @@ abstract class AnotherTunable<T> {
 
   String get label;
 
+  String? get helpText;
+
   Object? value;
 
   String? name;
+
+  int get index;
 }
 
-abstract class AnotherBooleanTunable extends AnotherTunable<bool> {}
+abstract class AnotherBooleanTunable extends AnotherTunable<bool> {
+  String valueLabel(bool value) {
+    if (value) {
+      return "On";
+    } else {
+      return "Off";
+    }
+  }
+}
 
 abstract class AnotherNumericTunable extends AnotherTunable<double> {
   double get min;

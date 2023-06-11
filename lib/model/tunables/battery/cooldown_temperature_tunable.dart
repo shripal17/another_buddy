@@ -2,7 +2,7 @@ import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/battery/battery_tunable.dart';
 
 @tunable
-class CooldownTemperatureTunable extends BatteryTunable {
+class CooldownTemperatureTunable extends BatteryNumericTunable {
   @override
   double get defaultValue => max;
 
@@ -27,4 +27,9 @@ class CooldownTemperatureTunable extends BatteryTunable {
   @override
   List<String>? get valueLabels => null;
 
+  @override
+  int get index => 2;
+
+  @override
+  String? get helpText => "The temperature which denotes the battery has been cooled down and can resume charging.";
 }

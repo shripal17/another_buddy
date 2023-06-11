@@ -2,7 +2,7 @@ import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/battery/battery_tunable.dart';
 
 @tunable
-class MaxTemperatureTunable extends BatteryTunable {
+class MaxTemperatureTunable extends BatteryNumericTunable {
   @override
   double get defaultValue => max;
 
@@ -27,4 +27,10 @@ class MaxTemperatureTunable extends BatteryTunable {
   @override
   List<String>? get valueLabels => null;
 
+  @override
+  int get index => 1;
+
+  @override
+  String? get helpText =>
+      "Maximum temperature of the battery allowed during charging. The kernel will stop charging if the battery exceeds this temperature.";
 }

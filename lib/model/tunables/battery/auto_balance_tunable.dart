@@ -2,7 +2,7 @@ import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/battery/battery_tunable.dart';
 
 @tunable
-class AutoBalanceTunable extends BatteryTunable {
+class AutoBalanceTunable extends BatteryNumericTunable {
   @override
   double get defaultValue => 6;
 
@@ -35,4 +35,11 @@ class AutoBalanceTunable extends BatteryTunable {
         "Best Performance",
         "Extreme Performance",
       ];
+
+  @override
+  int get index => 0;
+
+  @override
+  String? get helpText =>
+      "Automatically creates a balance between performance and battery saving as per your needs";
 }

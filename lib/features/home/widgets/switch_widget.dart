@@ -1,4 +1,5 @@
 import 'package:another_buddy/model/tunables/another_tunable.dart';
+import 'package:another_buddy/util/dialog_utils.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -16,10 +17,36 @@ class SwitchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-      title: Text(tunable.label),
-      value: (tunable.value as num).toInt() == 1,
-      onChanged: onValueChanged,
+    final theme = Theme.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const SizedBox(height: 8),
+        SwitchListTile(
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(tunable.label),
+              IconButton(
+                onPressed: () => DialogUtils.showHelpDialog(
+                    context, tunable, tunable.valueLabel(tunable.defaultValue)),
+                icon: const Icon(Icons.help),
+                iconSize: 22,
+              ),
+            ],
+          ),
+          value: (tunable.value as num).toInt() == 1,
+          onChanged: onValueChanged,
+        ),
+        const SizedBox(height: 8),
+        Container(
+          width: double.maxFinite,
+          height: 1,
+          color: theme.colorScheme.primaryContainer.withAlpha(200),
+        )
+      ],
     );
   }
 }

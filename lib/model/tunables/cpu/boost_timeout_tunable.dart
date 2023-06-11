@@ -26,4 +26,10 @@ class BoostTimeoutTunable extends CpuNumericTunable {
 
   @override
   List<String>? get valueLabels => null;
+
+  @override
+  int get index => 2;
+
+  @override
+  String? get helpText => "The CPU [Boost Frequency] will be applied for the specified duration.";
 }

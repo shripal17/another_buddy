@@ -26,4 +26,10 @@ class BoostFrequencyTunable extends CpuNumericTunable {
 
   @override
   List<String>? get valueLabels => ["1GHz", "1.2GHz", "1.3GHz", "1.5GHz"];
+
+  @override
+  int get index => 1;
+
+  @override
+  String? get helpText => "The CPU will be boosted with the specified frequency if [Input Boost] is active.";
 }

@@ -1,4 +1,5 @@
 import 'package:another_buddy/model/tunables/another_tunable.dart';
+import 'package:another_buddy/util/dialog_utils.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -27,8 +28,7 @@ class NumericSliderWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 16),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
           child: Row(
             children: [
               Text(
@@ -36,7 +36,13 @@ class NumericSliderWidget extends StatelessWidget {
                 style: theme.textTheme.bodyLarge,
               ),
               IconButton(
-                onPressed: () => onValueChanged(tunable.defaultValue),
+                onPressed: () => DialogUtils.showHelpDialog(
+                    context, tunable, tunable.valueLabel(tunable.defaultValue)),
+                icon: const Icon(Icons.help),
+                iconSize: 22,
+              ),
+              IconButton(
+                onPressed: () => _showDefaultValue(context),
                 icon: const Icon(Icons.refresh),
                 iconSize: 22,
               ),
@@ -74,5 +80,16 @@ class NumericSliderWidget extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void _showDefaultValue(BuildContext context) {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.clearSnackBars();
+    messenger.showSnackBar(SnackBar(
+      content:
+          Text("Default Value: ${tunable.valueLabel(tunable.defaultValue)}"),
+      action: SnackBarAction(
+          label: "Set", onPressed: () => onValueChanged(tunable.defaultValue)),
+    ));
   }
 }

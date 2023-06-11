@@ -40,7 +40,7 @@ class _TunableCategoryWidgetState extends State<TunableCategoryWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
-              children: widget.tunables.map<Widget>((tunable) {
+              children: widget.tunables.map((tunable) {
                 if (tunable is AnotherNumericTunable) {
                   return NumericSliderWidget(
                     tunable: tunable,
