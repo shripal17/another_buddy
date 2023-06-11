@@ -32,5 +32,5 @@ class MaxTemperatureTunable extends BatteryNumericTunable {
 
   @override
   String? get helpText =>
-      "Maximum temperature of the battery allowed during charging. The kernel will stop charging if the battery exceeds this temperature.";
+      "Maximum temperature of the battery allowed during charging. The kernel will stop charging if the battery exceeds this temperature.\nIf [Slow Charge when hot] is enabled, device charging rate will reduce after this temperature.";
 }
