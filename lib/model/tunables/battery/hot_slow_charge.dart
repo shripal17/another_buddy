@@ -7,7 +7,7 @@ class HotSlowChargeTunable extends BatteryBooleanTunable {
   bool get defaultValue => false;
 
   @override
-  String? get helpText => "Charging will continue at reduced rate even if temperate goes over [Maximum Temperature]";
+  String? get helpText => "Charging will continue at reduced rate even if temperature goes over [Maximum Temperature].\nEnabling this will override [Maximum Temperature] setting.";
 
   @override
   int get index => 3;
