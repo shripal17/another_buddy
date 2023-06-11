@@ -65,13 +65,27 @@ class _InitialisePageState extends State<InitialisePage> {
                   OutlinedButton(
                     onPressed: _showWarning,
                     child: const Text("Get Started"),
-                  )
+                  ),
                 } else if (state is LoadingState) ...{
                   const CircularProgressIndicator(),
                 } else if (state is RootCheckedState) ...{
-                  Text("Root available: ${state.available}")
+                  Text("Root available: ${state.available}"),
+                  if (!state.available) ...{
+                      const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: _showWarning,
+                      child: const Text("Try Again"),
+                    )
+                  }
                 } else if (state is RootAccessCheckedState) ...{
                   Text("Root access granted: ${state.granted}"),
+                  if (!state.granted) ...{
+                    const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: _showWarning,
+                      child: const Text("Try Again"),
+                    )
+                  }
                 } else ...{
                   const Text("Checking for root availability"),
                 },
