@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           fit: BoxFit.cover,
         ),
         const Text(
-            "Credits:\n- Carlo San (Kernel Creator)\n- RooGhz for base of AR version\n- Babu Frik (App Developer)")
+            "Credits:\n- @skillsetita (Kernel Creator)\n- [Outdated] @RooGhz720 for base of AR version\n- @bantomkramul for Vantom kernel-based R version\n- @babu_frik (App Developer)")
       ],
     );
   }
