@@ -27,8 +27,14 @@ class HomeCubit extends Cubit<HomeState> {
     emit(ValuesLoadedState(_groupedTunables));
   }
 
-  Map<TunableCategory, List<AnotherTunable>> get _groupedTunables =>
-      tunableInstances.values.groupBy((tunable) => tunable.category);
+  Map<TunableCategory, List<AnotherTunable>> get _groupedTunables {
+    final grouped =
+        tunableInstances.values.groupBy((tunable) => tunable.category);
+    grouped.forEach((key, value) {
+      grouped[key] = value.sortedBy((element) => element.index);
+    });
+    return grouped;
+  }
 
   Future<void> fetchCurrentValues() async {
     if (!_initialLoadDone) {

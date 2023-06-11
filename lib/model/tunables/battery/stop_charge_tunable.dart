@@ -2,7 +2,7 @@ import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/model/tunables/battery/battery_tunable.dart';
 
 @tunable
-class StopChargeTunable extends BatteryTunable {
+class StopChargeTunable extends BatteryNumericTunable {
   @override
   double get defaultValue => 100;
 
@@ -26,4 +26,10 @@ class StopChargeTunable extends BatteryTunable {
 
   @override
   String get label => "Stop Charge Percent";
+
+  @override
+  int get index => 3;
+
+  @override
+  String? get helpText => "Maximum percentage to charge the battery to. Once the charge reaches this percentage, the kernel will shut off charging. This is particularly recommended to increase battery longevity. Recommended maximum charge is 85%.\nYou should ideally always keep the charge between 30%-80%.";
 }
