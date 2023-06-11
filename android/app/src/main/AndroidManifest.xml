@@ -8,7 +8,7 @@
     <application
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher"
-            android:label="another_buddy">
+            android:label="Another Manager">
 
 
         <activity
@@ -29,8 +29,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.HOME"/>
-                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
