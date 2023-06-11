@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class DialogUtils {
   DialogUtils._();
 
-  static void showHelpDialog(
+  static Future<void> showHelpDialog(
       BuildContext context, AnotherTunable tunable, String defaultValue) {
-    showDialog(
+    return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(tunable.label),
@@ -16,6 +16,49 @@ class DialogUtils {
             onPressed: () => Navigator.maybePop(context),
             child: const Text("OK"),
           )
+        ],
+      ),
+    );
+  }
+
+  static Future<void> showGeneralDialog(
+    BuildContext context, {
+    required String title,
+    required String content,
+    String positiveButtonLabel = "OK",
+    String? negativeButtonLabel,
+    String? neutralButtonLabel,
+    VoidCallback? onPositiveButtonPressed,
+    VoidCallback? onNegativeButtonPressed,
+    VoidCallback? onNeutralButtonPressed,
+  }) {
+    if (negativeButtonLabel != null) {
+      assert(onNegativeButtonPressed != null);
+    }
+    if (neutralButtonLabel != null) {
+      assert(onNeutralButtonPressed != null);
+    }
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          if (neutralButtonLabel != null)
+            TextButton(
+              onPressed: onNeutralButtonPressed,
+              child: Text(neutralButtonLabel),
+            ),
+          if (negativeButtonLabel != null)
+            TextButton(
+              onPressed: onNegativeButtonPressed,
+              child: Text(negativeButtonLabel),
+            ),
+          TextButton(
+            onPressed:
+                onPositiveButtonPressed ?? () => Navigator.maybePop(context),
+            child: Text(positiveButtonLabel),
+          ),
         ],
       ),
     );
