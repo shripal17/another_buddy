@@ -28,6 +28,16 @@ class _InitialisePageState extends State<InitialisePage> {
   late final bloc = context.read<InitialiseBloc>();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (bloc.firstSetupDone()) {
+        bloc.add(CheckRootAvailabilityEvent());
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
@@ -71,7 +81,7 @@ class _InitialisePageState extends State<InitialisePage> {
                 } else if (state is RootCheckedState) ...{
                   Text("Root available: ${state.available}"),
                   if (!state.available) ...{
-                      const SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     OutlinedButton(
                       onPressed: _showWarning,
                       child: const Text("Try Again"),

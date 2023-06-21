@@ -1,14 +1,24 @@
 import 'package:another_buddy/features/initialise/initialise_screen.dart';
+import 'package:another_buddy/util/shared_prefs.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
 // ignore: unused_import
 import 'package:reflectable/reflectable.dart';
 
 import 'main.reflectable.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   initializeReflectable();
+  await _injectDependencies();
   runApp(const MyApp());
+}
+
+Future<void> _injectDependencies()async  {
+  final prefs = SharedPrefs();
+  await prefs.initialise();
+  KiwiContainer().registerSingleton((container) => prefs);
 }
 
 class MyApp extends StatelessWidget {
