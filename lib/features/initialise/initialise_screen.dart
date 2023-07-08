@@ -31,7 +31,7 @@ class _InitialisePageState extends State<InitialisePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (bloc.firstSetupDone()) {
+      if (bloc.isFirstSetupDone()) {
         bloc.add(CheckRootAvailabilityEvent());
       }
     });
@@ -48,6 +48,12 @@ class _InitialisePageState extends State<InitialisePage> {
             if (state is RootCheckedState && state.available) {
               bloc.add(CheckRootAccessEvent());
             } else if (state is RootAccessCheckedState && state.granted) {
+              if (bloc.isFirstSetupDone()) {
+                bloc.add(RequestNotificationPermissionEvent());
+              } else {
+                _showNotificationPermissionDialog();
+              }
+            } else if (state is NotificationPermissionResultState) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()));
             }
@@ -126,6 +132,20 @@ class _InitialisePageState extends State<InitialisePage> {
         if (await LaunchApp.isAppInstalled(androidPackageName: kernelSuPkg)) {
           await LaunchApp.openApp(androidPackageName: kernelSuPkg);
         }
+      },
+    );
+  }
+
+  Future<void> _showNotificationPermissionDialog() async {
+    await DialogUtils.showGeneralDialog(
+      context,
+      title: "Set on boot",
+      content:
+          "The configuration you change in the app will be saved and will be automatically applied after 10 seconds of boot. The app will show a notification before applying the settings and allow you to cancel it through the notification.\nFor this to work, you need to allow the app notifications permission.",
+      positiveButtonLabel: "Continue",
+      onPositiveButtonPressed: () {
+        Navigator.maybePop(context);
+        bloc.add(RequestNotificationPermissionEvent());
       },
     );
   }

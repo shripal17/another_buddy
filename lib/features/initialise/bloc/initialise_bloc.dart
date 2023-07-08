@@ -3,6 +3,7 @@ import 'package:another_buddy/util/pref_constants.dart';
 import 'package:another_buddy/util/shared_prefs.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:meta/meta.dart';
 import 'package:root/root.dart';
@@ -18,11 +19,13 @@ class InitialiseBloc extends Bloc<InitialiseEvent, InitialiseState> {
     on<CheckRootAvailabilityEvent>(
         (event, emit) => _checkRootAvailability(emit));
     on<CheckRootAccessEvent>((event, emit) => _checkRootAccess(emit));
+    on<RequestNotificationPermissionEvent>(
+        (event, emit) => _requestNotificationPermission(emit));
   }
 
   final _prefs = KiwiContainer().resolve<SharedPrefs>();
 
-  bool firstSetupDone() =>
+  bool isFirstSetupDone() =>
       _prefs.getBool(PrefConstants.KEY_FIRST_SETUP_DONE, false);
 
   void _checkRootAvailability(InitEmitter emit) async {
@@ -34,8 +37,15 @@ class InitialiseBloc extends Bloc<InitialiseEvent, InitialiseState> {
     emit(const LoadingState(LoadingStage.rootAccess));
     final rootAvailable = await Root.isRootAvailable() ?? false;
     emit(RootAccessCheckedState(rootAvailable));
-    if (rootAvailable) {
-      _prefs.setBool(PrefConstants.KEY_FIRST_SETUP_DONE, true);
-    }
+  }
+
+  void _requestNotificationPermission(InitEmitter emit) async {
+    final granted = await FlutterLocalNotificationsPlugin()
+            .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()
+            ?.requestPermission() ??
+        false;
+    emit(NotificationPermissionResultState(granted));
+    _prefs.setBool(PrefConstants.KEY_FIRST_SETUP_DONE, true);
   }
 }

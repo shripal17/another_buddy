@@ -38,3 +38,12 @@ class RootAccessCheckedState extends InitialiseState {
   @override
   List<Object?> get props => [time, granted];
 }
+
+class NotificationPermissionResultState extends InitialiseState {
+  final bool granted;
+
+  const NotificationPermissionResultState(this.granted);
+
+  @override
+  List<Object?> get props => [time, granted];
+}

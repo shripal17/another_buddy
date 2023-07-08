@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:another_buddy/model/loading_stage.dart';
 import 'package:another_buddy/model/tunables/another_tunable.dart';
+import 'package:another_buddy/util/pref_constants.dart';
+import 'package:another_buddy/util/shared_prefs.dart';
 import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:root/root.dart';
 
 part 'home_state.dart';
@@ -16,6 +21,8 @@ class HomeCubit extends Cubit<HomeState> {
       tunableInstances[tunableMirror.simpleName] = tunable;
     }
   }
+  
+  late final prefs = KiwiContainer().resolve<SharedPrefs>();
 
   final allTunables = tunable.annotatedClasses;
   final tunableInstances = <String, AnotherTunable>{};
@@ -59,6 +66,7 @@ class HomeCubit extends Cubit<HomeState> {
     final filePath = "/sys/class/misc/${tunable.path}";
     final updatedValue =
         await Root.exec(cmd: "echo \"$newValue\" > $filePath && cat $filePath");
+    _updatePrefs(filePath, newValue);
     if (updatedValue?.trim() == newValue.toString().trim()) {
       tunableInstances[tunableKey]?.value = newValue;
       _originalValues[tunableKey] = newValue;
@@ -73,5 +81,17 @@ class HomeCubit extends Cubit<HomeState> {
   void updateUIValue(String tunableKey, Object newValue) {
     tunableInstances[tunableKey]?.value = newValue;
     _emitValuesState();
+  }
+  
+  void _updatePrefs(String tunableFile, Object value) {
+    final currentPref = prefs.getString(PrefConstants.KEY_TUNABLE_SETTINGS, "");
+    Map<String, Object> newPref;
+    if(currentPref.isEmpty) {
+      newPref = {};
+    } else {
+      newPref = Map.from(jsonDecode(currentPref));
+    }
+    newPref[tunableFile] = value;
+    prefs.setString(PrefConstants.KEY_TUNABLE_SETTINGS, jsonEncode(newPref));
   }
 }
