@@ -21,7 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
       tunableInstances[tunableMirror.simpleName] = tunable;
     }
   }
-  
+
   late final prefs = KiwiContainer().resolve<SharedPrefs>();
 
   final allTunables = tunable.annotatedClasses;
@@ -55,7 +55,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> _loadValue(String tunableName, AnotherTunable tunable) async {
     final readValue = Root.exec(cmd: "cat /sys/class/misc/${tunable.path}");
-    tunable.value = num.tryParse(await readValue ?? "") ?? 0.0;
+    if (tunable is AnotherStringTunable) {
+      String value = await readValue ?? "";
+      if (value == "nul\n") {
+        value = "";
+      }
+      tunable.value = value;
+    } else {
+      tunable.value = num.tryParse(await readValue ?? "") ?? 0.0;
+    }
     _originalValues[tunableName] = tunable.value!;
   }
 
@@ -82,11 +90,11 @@ class HomeCubit extends Cubit<HomeState> {
     tunableInstances[tunableKey]?.value = newValue;
     _emitValuesState();
   }
-  
+
   void _updatePrefs(String tunableFile, Object value) {
     final currentPref = prefs.getString(PrefConstants.KEY_TUNABLE_SETTINGS, "");
     Map<String, Object> newPref;
-    if(currentPref.isEmpty) {
+    if (currentPref.isEmpty) {
       newPref = {};
     } else {
       newPref = Map.from(jsonDecode(currentPref));

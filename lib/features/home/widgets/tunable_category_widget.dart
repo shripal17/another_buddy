@@ -1,5 +1,6 @@
 import 'package:another_buddy/features/home/cubit/home_cubit.dart';
 import 'package:another_buddy/features/home/widgets/numeric_slider_widget.dart';
+import 'package:another_buddy/features/home/widgets/string_input_widget.dart';
 import 'package:another_buddy/features/home/widgets/switch_widget.dart';
 import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +69,8 @@ class _TunableCategoryWidgetState extends State<TunableCategoryWidget> {
                       });
                     },
                   );
+                } else if (tunable is AnotherStringTunable) {
+                  return StringInputWidget(tunable: tunable, onClick: () {});
                 }
                 return Text("${tunable.label}: ${tunable.value}");
               }).toList(),

@@ -27,6 +27,15 @@ import 'package:another_buddy/model/tunables/cpu/boost_timeout_tunable.dart';
 // ignore: unused_import
 import 'package:another_buddy/model/tunables/cpu/input_boost_tunable.dart';
 
+// ignore: unused_import
+import 'package:another_buddy/model/tunables/app_killer/app_killer_active_tunable.dart';
+
+// ignore: unused_import
+import 'package:another_buddy/model/tunables/app_killer/apps_list_tunable.dart';
+
+// ignore: unused_import
+import 'package:another_buddy/model/tunables/app_killer/interval_tunable.dart';
+
 class Tunable extends Reflectable {
   const Tunable()
       : super(
@@ -93,7 +102,32 @@ abstract class AnotherNumericTunable extends AnotherTunable<double> {
   }
 }
 
+abstract class AnotherStringTunable extends AnotherTunable<String> {
+  bool get listMode;
+
+  String get listSeparator;
+
+  String? get itemsType;
+
+  List<String> values() {
+    if (listMode) {
+      return (value as String).split(listSeparator);
+    } else {
+      return [value as String];
+    }
+  }
+
+  String valueLabel() {
+    if (listMode) {
+      return "${values().length} ${itemsType ?? "items"}";
+    } else {
+      return value as String;
+    }
+  }
+}
+
 enum TunableCategory {
+  appKiller,
   battery,
   cpu;
 }
