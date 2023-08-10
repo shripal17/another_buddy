@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:reflectable/reflectable.dart';
 
 // ignore: unused_import
@@ -111,7 +112,11 @@ abstract class AnotherStringTunable extends AnotherTunable<String> {
 
   List<String> values() {
     if (listMode) {
-      return (value as String).split(listSeparator);
+      final strValue = value as String;
+      if (strValue.isNullOrEmpty) {
+        return [];
+      }
+      return strValue.split(listSeparator);
     } else {
       return [value as String];
     }

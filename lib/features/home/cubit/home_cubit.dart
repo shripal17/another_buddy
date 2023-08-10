@@ -60,7 +60,7 @@ class HomeCubit extends Cubit<HomeState> {
       if (value == "nul\n") {
         value = "";
       }
-      tunable.value = value;
+      tunable.value = value.trim();
     } else {
       tunable.value = num.tryParse(await readValue ?? "") ?? 0.0;
     }
