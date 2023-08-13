@@ -14,7 +14,7 @@ class AppsSelectionCubit extends Cubit<AppsSelectionState> {
 
   late final List<String> initialSelection;
   final List<Application> allApps = [];
-  final Set<Application> filteredApps = {};
+  final List<Application> filteredApps = [];
   late final List<String> currentSelection;
   String searchTerm = "";
   bool isSearchActive = false;
@@ -31,11 +31,6 @@ class AppsSelectionCubit extends Cubit<AppsSelectionState> {
     filteredApps.clear();
     filteredApps.addAll(
       allApps.filter(
-        (element) => isAppSelected(element),
-      ),
-    );
-    filteredApps.addAll(
-      allApps.filter(
         (element) =>
             element.packageName.contains(searchTerm) ||
             element.appName.toLowerCase().contains(searchTerm),
@@ -46,7 +41,7 @@ class AppsSelectionCubit extends Cubit<AppsSelectionState> {
 
   List<Application> get appsToDisplay {
     if (searchTerm.isNotEmpty) {
-      return filteredApps.toList();
+      return filteredApps;
     }
     return allApps;
   }

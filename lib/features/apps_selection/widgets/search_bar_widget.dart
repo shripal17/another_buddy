@@ -27,7 +27,10 @@ class SearchBarWidget extends StatelessWidget {
             ? null
             : IconButton(
                 icon: const Icon(Icons.clear),
-                onPressed: () => controller.text = "",
+                onPressed: () {
+                  controller.text = "";
+                  closeSearch();
+                },
               ),
       ),
     );

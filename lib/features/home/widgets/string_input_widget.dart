@@ -1,5 +1,7 @@
+import 'package:another_buddy/horizontal_divider.dart';
 import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:another_buddy/util/dialog_utils.dart';
+import 'package:another_buddy/util/theme_utils.dart';
 import 'package:flutter/material.dart';
 
 class StringInputWidget extends StatelessWidget {
@@ -47,7 +49,6 @@ class StringInputWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
                     Text(
                       tunable.valueLabel(),
                       style: theme.textTheme.bodyMedium,
@@ -64,11 +65,8 @@ class StringInputWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Container(
-          width: double.maxFinite,
-          height: 1,
-          color: theme.colorScheme.primaryContainer.withAlpha(200),
-        )
+        HorizontalDivider(color: ThemeUtils.getDividerColor(theme)),
+        const SizedBox(height: 8),
       ],
     );
   }
