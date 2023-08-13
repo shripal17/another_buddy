@@ -22,49 +22,49 @@ class StringInputWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          tunable.label,
-                          style: theme.textTheme.bodyLarge,
-                        ),
-                        IconButton(
-                          onPressed: () =>
-                              DialogUtils.showHelpDialog(context, tunable),
-                          icon: const Icon(Icons.help),
-                          iconSize: 22,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      tunable.valueLabel(),
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                  ],
+        InkWell(
+          onTap: onClick,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            tunable.label,
+                            style: theme.textTheme.bodyLarge,
+                          ),
+                          IconButton(
+                            onPressed: () =>
+                                DialogUtils.showHelpDialog(context, tunable),
+                            icon: const Icon(Icons.help),
+                            iconSize: 22,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        tunable.valueLabel(),
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Spacer(),
-              IconButton(
-                onPressed: onClick,
-                icon: const Icon(Icons.chevron_right_rounded),
-              )
-            ],
+                const Spacer(),
+                const Icon(Icons.chevron_right_rounded)
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 8),
         HorizontalDivider(color: ThemeUtils.getDividerColor(theme)),
         const SizedBox(height: 8),
       ],
