@@ -82,10 +82,11 @@ class _TunableCategoryWidgetState extends State<TunableCategoryWidget> {
                         ),
                       );
                       if (newAppsList != null) {
-                        cubit.updateUIValue(
-                            tunable.name!, newAppsList.join(";"));
-                        cubit.updateTunableFile(
-                            tunable.name!, newAppsList.join(";"));
+                        setState(() {
+                          final newValue = newAppsList.join(";");
+                          cubit.updateUIValue(tunable.name!, newValue);
+                          cubit.updateTunableFile(tunable.name!, newValue);
+                        });
                       }
                     },
                   );

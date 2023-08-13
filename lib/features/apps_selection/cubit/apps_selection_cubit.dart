@@ -14,13 +14,41 @@ class AppsSelectionCubit extends Cubit<AppsSelectionState> {
 
   late final List<String> initialSelection;
   final List<Application> allApps = [];
+  final Set<Application> filteredApps = {};
   late final List<String> currentSelection;
+  String searchTerm = "";
+  bool isSearchActive = false;
 
   Future<void> loadAppsList() async {
     final apps =
         await DeviceApps.getInstalledApplications(includeAppIcons: true);
     allApps.addAll(apps.sortedBy((app) => app.appName));
     emit(AppsSelectionUpdateState(currentSelection));
+  }
+
+  void updateSearch(String newTerm) {
+    searchTerm = newTerm.trim().toLowerCase();
+    filteredApps.clear();
+    filteredApps.addAll(
+      allApps.filter(
+        (element) => isAppSelected(element),
+      ),
+    );
+    filteredApps.addAll(
+      allApps.filter(
+        (element) =>
+            element.packageName.contains(searchTerm) ||
+            element.appName.toLowerCase().contains(searchTerm),
+      ),
+    );
+    emit(AppsSelectionUpdateState(currentSelection));
+  }
+
+  List<Application> get appsToDisplay {
+    if (searchTerm.isNotEmpty) {
+      return filteredApps.toList();
+    }
+    return allApps;
   }
 
   void updateSelection(Application app, bool isSelected) {
