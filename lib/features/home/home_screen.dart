@@ -3,6 +3,7 @@ import 'package:another_buddy/features/home/widgets/tunable_category_widget.dart
 import 'package:another_buddy/model/loading_stage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 /*
  * Created by Shripal Jain
@@ -98,11 +99,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showAboutDialog() {
+  void _showAboutDialog() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    // ignore: use_build_context_synchronously
     showAboutDialog(
       context: context,
       applicationName: "Another Manager",
-      applicationVersion: "v0.5",
+      applicationVersion: "v${packageInfo.version}",
       children: [
         Image.asset(
           'assets/logo.png',
