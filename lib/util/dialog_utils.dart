@@ -5,12 +5,13 @@ class DialogUtils {
   DialogUtils._();
 
   static Future<void> showHelpDialog(
-      BuildContext context, AnotherTunable tunable, String defaultValue) {
+      BuildContext context, AnotherTunable tunable, [String? defaultValue]) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(tunable.label),
-        content: Text("${tunable.helpText!}\n\nDefault Value: $defaultValue"),
+        content: Text(
+            "${tunable.helpText!}${defaultValue != null ? "\n\nDefault Value: $defaultValue" : ""}"),
         actions: [
           TextButton(
             onPressed: () => Navigator.maybePop(context),

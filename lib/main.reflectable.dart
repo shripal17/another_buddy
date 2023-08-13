@@ -3,6 +3,12 @@
 
 import 'dart:core';
 import 'package:another_buddy/model/tunables/another_tunable.dart' as prefix0;
+import 'package:another_buddy/model/tunables/app_killer/app_killer_active_tunable.dart'
+    as prefix10;
+import 'package:another_buddy/model/tunables/app_killer/apps_list_tunable.dart'
+    as prefix11;
+import 'package:another_buddy/model/tunables/app_killer/interval_tunable.dart'
+    as prefix12;
 import 'package:another_buddy/model/tunables/battery/auto_balance_tunable.dart'
     as prefix1;
 import 'package:another_buddy/model/tunables/battery/continue_charge_tunable.dart'
@@ -236,6 +242,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'value=': 1,
               r'name': 0,
               r'name=': 1,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'helpText': 0,
@@ -396,12 +403,132 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'value=': 1,
               r'name': 0,
               r'name=': 1,
+              r'valueLabel': 1,
               r'category': 0,
               r'defaultValue': 0,
               r'label': 0,
               r'path': 0,
               r'index': 0,
               r'helpText': 0
+            }),
+        r.NonGenericClassMirrorImpl(
+            r'AppKillerActiveTunable',
+            r'.AppKillerActiveTunable',
+            134217735,
+            9,
+            const prefix0.Tunable(),
+            const <int>[-1],
+            null,
+            null,
+            -1,
+            {},
+            {},
+            {
+              r'': (bool b) =>
+                  () => b ? prefix10.AppKillerActiveTunable() : null
+            },
+            -1,
+            -1,
+            const <int>[-1],
+            const <Object>[prefix0.tunable],
+            {
+              r'==': 1,
+              r'toString': 0,
+              r'noSuchMethod': 1,
+              r'hashCode': 0,
+              r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'name': 0,
+              r'name=': 1,
+              r'valueLabel': 1,
+              r'category': 0,
+              r'defaultValue': 0,
+              r'helpText': 0,
+              r'index': 0,
+              r'label': 0,
+              r'path': 0
+            }),
+        r.NonGenericClassMirrorImpl(
+            r'AppsListTunable',
+            r'.AppsListTunable',
+            134217735,
+            10,
+            const prefix0.Tunable(),
+            const <int>[-1],
+            null,
+            null,
+            -1,
+            {},
+            {},
+            {r'': (bool b) => () => b ? prefix11.AppsListTunable() : null},
+            -1,
+            -1,
+            const <int>[-1],
+            const <Object>[prefix0.tunable],
+            {
+              r'==': 1,
+              r'toString': 0,
+              r'noSuchMethod': 1,
+              r'hashCode': 0,
+              r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'name': 0,
+              r'name=': 1,
+              r'values': 0,
+              r'valueLabel': 0,
+              r'listMode': 0,
+              r'category': 0,
+              r'defaultValue': 0,
+              r'helpText': 0,
+              r'index': 0,
+              r'label': 0,
+              r'listSeparator': 0,
+              r'path': 0,
+              r'itemsType': 0
+            }),
+        r.NonGenericClassMirrorImpl(
+            r'IntervalTunable',
+            r'.IntervalTunable',
+            134217735,
+            11,
+            const prefix0.Tunable(),
+            const <int>[-1],
+            null,
+            null,
+            -1,
+            {},
+            {},
+            {r'': (bool b) => () => b ? prefix12.IntervalTunable() : null},
+            -1,
+            -1,
+            const <int>[-1],
+            const <Object>[prefix0.tunable],
+            {
+              r'==': 1,
+              r'toString': 0,
+              r'noSuchMethod': 1,
+              r'hashCode': 0,
+              r'runtimeType': 0,
+              r'value': 0,
+              r'value=': 1,
+              r'name': 0,
+              r'name=': 1,
+              r'minLabel': 0,
+              r'maxLabel': 0,
+              r'valueLabel': 1,
+              r'category': 0,
+              r'defaultValue': 0,
+              r'divisions': 0,
+              r'helpText': 0,
+              r'index': 0,
+              r'label': 0,
+              r'max': 0,
+              r'min': 0,
+              r'path': 0,
+              r'unit': 0,
+              r'valueLabels': 0
             })
       ],
       null,
@@ -415,9 +542,12 @@ final _data = <r.Reflectable, r.ReflectorData>{
         prefix6.StopChargeTunable,
         prefix7.BoostFrequencyTunable,
         prefix8.BoostTimeoutTunable,
-        prefix9.InputBoostTunable
+        prefix9.InputBoostTunable,
+        prefix10.AppKillerActiveTunable,
+        prefix11.AppsListTunable,
+        prefix12.IntervalTunable
       ],
-      9,
+      12,
       {
         r'==': (dynamic instance) => (x) => instance == x,
         r'toString': (dynamic instance) => instance.toString,
@@ -439,7 +569,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'unit': (dynamic instance) => instance.unit,
         r'valueLabels': (dynamic instance) => instance.valueLabels,
         r'index': (dynamic instance) => instance.index,
-        r'helpText': (dynamic instance) => instance.helpText
+        r'helpText': (dynamic instance) => instance.helpText,
+        r'values': (dynamic instance) => instance.values,
+        r'listMode': (dynamic instance) => instance.listMode,
+        r'listSeparator': (dynamic instance) => instance.listSeparator,
+        r'itemsType': (dynamic instance) => instance.itemsType
       },
       {
         r'value=': (dynamic instance, value) => instance.value = value,

@@ -1,5 +1,7 @@
+import 'package:another_buddy/features/apps_selection/apps_selection_screen.dart';
 import 'package:another_buddy/features/home/cubit/home_cubit.dart';
 import 'package:another_buddy/features/home/widgets/numeric_slider_widget.dart';
+import 'package:another_buddy/features/home/widgets/string_input_widget.dart';
 import 'package:another_buddy/features/home/widgets/switch_widget.dart';
 import 'package:another_buddy/model/tunables/another_tunable.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,26 @@ class _TunableCategoryWidgetState extends State<TunableCategoryWidget> {
                           cubit.updateTunableFile(tunable.name!, 0);
                         }
                       });
+                    },
+                  );
+                } else if (tunable is AnotherStringTunable) {
+                  return StringInputWidget(
+                    tunable: tunable,
+                    onClick: () async {
+                      final newAppsList =
+                          await Navigator.of(context).push<List<String>>(
+                        MaterialPageRoute(
+                          builder: (context) => AppsSelectionScreen(
+                              selectedApps: tunable.values()),
+                        ),
+                      );
+                      if (newAppsList != null) {
+                        setState(() {
+                          final newValue = newAppsList.join(";");
+                          cubit.updateUIValue(tunable.name!, newValue);
+                          cubit.updateTunableFile(tunable.name!, newValue);
+                        });
+                      }
                     },
                   );
                 }
