@@ -100,6 +100,7 @@ class _AppsSelectionPageState extends State<AppsSelectionPage> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.save),
           onPressed: () {
+            unsavedChanges = false;
             Navigator.maybePop(context, cubit.currentSelection);
           },
         ),
