@@ -11,7 +11,7 @@ class IntervalTunable extends AppKillerNumericTunable {
 
   @override
   String? get helpText =>
-      "The interval (in seconds) after which the kernel should kill selected apps";
+      "The interval (in seconds) after which the selected apps will be killed";
 
   @override
   int get index => 2;

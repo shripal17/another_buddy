@@ -7,7 +7,7 @@ class AppsListTunable extends AppKillerStringListTunable {
   String get defaultValue => "";
 
   @override
-  String? get helpText => "Kills apps in the background";
+  String? get helpText => "Select apps which you want to be killed in background";
 
   @override
   int get index => 1;

@@ -7,7 +7,7 @@ class AppKillerActiveTunable extends AppKillerBooleanTunable {
   bool get defaultValue => false;
 
   @override
-  String? get helpText => "Kills selected apps after [Interval] duration";
+  String? get helpText => "The selected apps will be killed in the background after each duration as specified in [Interval]";
 
   @override
   int get index => 0;
