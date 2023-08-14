@@ -70,7 +70,7 @@ class BootReceiver : BroadcastReceiver() {
     val value = entry.value
     try {
       suOutputStream.apply {
-        writeBytes("echo $value > $tunableFile\n")
+        writeBytes("echo \"$value\" > $tunableFile\n")
         flush()
       }
     } catch (e: IOException) {
